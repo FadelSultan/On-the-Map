@@ -13,21 +13,20 @@ class SearchLocationVC: UIViewController {
 
 //    outlet
     @IBOutlet weak var textFieldSearch: UITextField!
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
         
-    }
-    
     private func searchLocation(textSearch:String) {
+        
         let searchRequest = MKLocalSearch.Request()
         searchRequest.naturalLanguageQuery = textSearch
         
         let activeSearch = MKLocalSearch(request: searchRequest)
+        cProgress.start(add: view, text: "Searching ...")
         activeSearch.start { (response, error) in
             
             if let error = error {
-                print("Error " , error.localizedDescription)
+                cProgress.hide()
+                let alert = UIAlertController.alert(message: error.localizedDescription) {}
+                self.present(alert, animated: true, completion: nil)
                 return
             }
             
@@ -38,12 +37,16 @@ class SearchLocationVC: UIViewController {
             vc.latitude = latitude
             vc.longitude = longitude
             self.navigationController?.pushViewController(vc, animated: true)
+            cProgress.hide()
         }
     }
 
     @IBAction func btnSearchLocaion(_ sender: Any) {
         guard let textSearch = textFieldSearch.text , !textSearch.isEmpty else {
-            print("Please insert text search !")
+            let alert = UIAlertController.alert(message: "Please write text search!") {
+                self.textFieldSearch.becomeFirstResponder()
+            }
+            self.present(alert, animated: true, completion: nil)
             return
         }
         searchLocation(textSearch: textSearch)

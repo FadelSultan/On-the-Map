@@ -20,34 +20,44 @@ class MapVC: UIViewController {
     }
     
     private func loadPoints() {
-        
-        LocationsData.getData { (points) in
-            var annotations = [MKPointAnnotation]()
-            for point in points {
-                let lat = CLLocationDegrees(point.latitude)
-                let long = CLLocationDegrees(point.longitude)
+        cProgress.start(add: view)
+        studentInformation.getData { (error) in
+            DispatchQueue.main.async {
+                if let error = error {
+                    cProgress.hide()
+                    let alert = UIAlertController.alert(message: error.localizedDescription) {}
+                    self.present(alert, animated: true, completion: nil)
+                    return
+                }
                 
-                // The lat and long are used to create a CLLocationCoordinates2D instance.
-                let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
+                var annotations = [MKPointAnnotation]()
+                for point in studentInformation.arrStudentInformation {
+                    let lat = CLLocationDegrees(point.latitude)
+                    let long = CLLocationDegrees(point.longitude)
+                    
+                    // The lat and long are used to create a CLLocationCoordinates2D instance.
+                    let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
+                    
+                    let first = point.firstName
+                    let last = point.lastName
+                    let mediaURL = point.mediaURL
+                    
+                    // Here we create the annotation and set its coordiate, title, and subtitle properties
+                    let annotation = MKPointAnnotation()
+                    annotation.coordinate = coordinate
+                    annotation.title = "\(first) \(last)"
+                    annotation.subtitle = mediaURL
+                    
+                    // Finally we place the annotation in an array of annotations.
+                    annotations.append(annotation)
+                }
+                self.mapView.addAnnotations(annotations)
                 
-                let first = point.firstName
-                let last = point.lastName
-                let mediaURL = point.mediaURL
-                
-                // Here we create the annotation and set its coordiate, title, and subtitle properties
-                let annotation = MKPointAnnotation()
-                annotation.coordinate = coordinate
-                annotation.title = "\(first) \(last)"
-                annotation.subtitle = mediaURL
-                
-                // Finally we place the annotation in an array of annotations.
-                annotations.append(annotation)
+                let center = CLLocationCoordinate2D(latitude: studentInformation.arrStudentInformation.last!.latitude, longitude: studentInformation.arrStudentInformation.last!.longitude)
+                let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 50, longitudeDelta: 50))
+                self.mapView.setRegion(region, animated: true)
+                cProgress.hide()
             }
-            self.mapView.addAnnotations(annotations)
-            
-            let center = CLLocationCoordinate2D(latitude: points.last!.latitude, longitude: points.last!.longitude)
-            let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 50, longitudeDelta: 50))
-            self.mapView.setRegion(region, animated: true)
         }
     }
     
@@ -58,7 +68,7 @@ class MapVC: UIViewController {
     
     //    Actions
     @IBAction func btnAddNewLocation(_ sender: Any) {
-        if LocationsData.isAddedLocations {
+        if studentInformation.isAddedLocations {
             let alert = UIAlertController(title: nil, message: "You have already posted a student location. Would you like to overwrite current location ?", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Overwrite", style: .destructive, handler: { (_) in
                 self.openSearchLocation()
@@ -73,6 +83,20 @@ class MapVC: UIViewController {
     @IBAction func btnRefreshData(_ sender: Any) {
         loadPoints()
     }
+    
+    @IBAction func btnLogout(_ sender: Any) {
+        API.deleteSession { (error) in
+            DispatchQueue.main.async {
+                if let error = error {
+                    let alert = UIAlertController.alert(message: error.localizedDescription) {}
+                    self.present(alert, animated: true, completion: nil)
+                    return
+                }      
+                self.view.window!.rootViewController?.dismiss(animated: false, completion: nil)
+            }
+        }
+    }
+    
 }
 
 // MARK:- MKMapViewDelegate

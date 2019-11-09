@@ -22,16 +22,25 @@ class LoginVC: UIViewController {
     
     //    Actions
     @IBAction func btnLogin(_ sender: Any) {
+        cProgress.start(add: view, text: "Sing in ...")
         guard let email = textFieldUsername.text , !email.isEmpty
             , let password = textFieldPassword.text , !password.isEmpty else {
+                cProgress.hide()
                 let alert = UIAlertController.alert(message: "Write email and passwod") {}
                 present(alert, animated: true, completion: nil)
                 return
         }
         
-        model.signIn(email: email, password: password) { (isSuccess) in
-            print("isSuccess " , isSuccess)
+        model.signIn(email: email, password: password) { (isSuccess , error) in
+            cProgress.hide()
             DispatchQueue.main.async {
+                if let error = error {
+                    let alert = UIAlertController.alert(message: error.localizedDescription) {
+                        
+                    }
+                    self.present(alert, animated: true, completion: nil)
+                    return
+                }
                 if isSuccess {
                     let vc = self.storyboard?.instantiateViewController(withIdentifier: "TBController") as! UITabBarController
                     vc.modalPresentationStyle = .fullScreen

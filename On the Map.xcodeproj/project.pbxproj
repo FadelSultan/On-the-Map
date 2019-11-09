@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		35BA6FD631A42E0BF84DB055 /* Pods_On_the_Map.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C19A3C5488B863C5BF6F9BC2 /* Pods_On_the_Map.framework */; };
 		E537237B2375AE58003CB1F1 /* AddNewLocationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E537237A2375AE58003CB1F1 /* AddNewLocationVC.swift */; };
+		E537237D2376125D003CB1F1 /* cProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = E537237C2376125D003CB1F1 /* cProgress.swift */; };
+		E537238023761827003CB1F1 /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = E537237F23761827003CB1F1 /* Users.swift */; };
 		E5446855236D6C1000B3ED8F /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5446854236D6C1000B3ED8F /* MapVC.swift */; };
 		E5446857236D6D4400B3ED8F /* Locations.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5446856236D6D4400B3ED8F /* Locations.swift */; };
 		E544685B236D908400B3ED8F /* ListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E544685A236D908400B3ED8F /* ListVC.swift */; };
@@ -30,6 +32,8 @@
 		C19A3C5488B863C5BF6F9BC2 /* Pods_On_the_Map.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_On_the_Map.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0D92C38FCC82298F506AEB9 /* Pods-On the Map.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-On the Map.release.xcconfig"; path = "Target Support Files/Pods-On the Map/Pods-On the Map.release.xcconfig"; sourceTree = "<group>"; };
 		E537237A2375AE58003CB1F1 /* AddNewLocationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewLocationVC.swift; sourceTree = "<group>"; };
+		E537237C2376125D003CB1F1 /* cProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cProgress.swift; sourceTree = "<group>"; };
+		E537237F23761827003CB1F1 /* Users.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
 		E5446854236D6C1000B3ED8F /* MapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
 		E5446856236D6D4400B3ED8F /* Locations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Locations.swift; sourceTree = "<group>"; };
 		E544685A236D908400B3ED8F /* ListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListVC.swift; sourceTree = "<group>"; };
@@ -152,6 +156,7 @@
 			children = (
 				E5B42AD8234CE7FA00F5997A /* LoginVC.swift */,
 				E5B42AE9234CFE6200F5997A /* LoginVC+model.swift */,
+				E537237F23761827003CB1F1 /* Users.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -162,6 +167,7 @@
 				E57F2842234D02E800CC5B30 /* Extension+AlertController.swift */,
 				E5BE8B0023520EFC007AE717 /* API.swift */,
 				E57D1FFF23759D1300118956 /* Location.swift */,
+				E537237C2376125D003CB1F1 /* cProgress.swift */,
 			);
 			path = "support functions";
 			sourceTree = "<group>";
@@ -286,6 +292,8 @@
 				E5B42AD5234CE7FA00F5997A /* AppDelegate.swift in Sources */,
 				E5B42AD7234CE7FA00F5997A /* SceneDelegate.swift in Sources */,
 				E5B42AEA234CFE6200F5997A /* LoginVC+model.swift in Sources */,
+				E537237D2376125D003CB1F1 /* cProgress.swift in Sources */,
+				E537238023761827003CB1F1 /* Users.swift in Sources */,
 				E5BE8B0123520EFC007AE717 /* API.swift in Sources */,
 				E5446855236D6C1000B3ED8F /* MapVC.swift in Sources */,
 				E57D1FFE2375984000118956 /* SearchLocationVC.swift in Sources */,

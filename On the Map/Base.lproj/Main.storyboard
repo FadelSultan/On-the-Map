@@ -164,16 +164,23 @@
                         <viewLayoutGuide key="safeArea" id="CQo-7G-7pa"/>
                     </view>
                     <navigationItem key="navigationItem" id="3EL-1c-gcC">
-                        <barButtonItem key="leftBarButtonItem" image="icon_pin" id="9b7-lP-PcX">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="LWU-Z9-FCJ">
                             <connections>
-                                <action selector="btnAddNewLocation:" destination="mNt-yt-0id" id="RVT-mf-Wkh"/>
+                                <action selector="btnLogout:" destination="mNt-yt-0id" id="UBi-an-pre"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" image="icon_refresh" id="NBU-fH-TTN">
-                            <connections>
-                                <action selector="btnRefreshData:" destination="mNt-yt-0id" id="w3n-ey-6t3"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem image="icon_refresh" id="NBU-fH-TTN">
+                                <connections>
+                                    <action selector="btnRefreshData:" destination="mNt-yt-0id" id="w3n-ey-6t3"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem image="icon_pin" id="9b7-lP-PcX">
+                                <connections>
+                                    <action selector="btnAddNewLocation:" destination="mNt-yt-0id" id="RVT-mf-Wkh"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="mapView" destination="mwt-9Y-hgi" id="1WE-de-1Xg"/>
@@ -395,16 +402,23 @@ today?</string>
                         <viewLayoutGuide key="safeArea" id="chQ-jF-Drb"/>
                     </view>
                     <navigationItem key="navigationItem" id="hnb-VA-M0N">
-                        <barButtonItem key="leftBarButtonItem" image="icon_pin" id="cDk-wo-zca">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="OEE-9J-tZp">
                             <connections>
-                                <action selector="btnSearchLocation:" destination="wDp-rO-HtX" id="xHA-EG-5Oy"/>
+                                <action selector="btnLogout:" destination="wDp-rO-HtX" id="tDv-XM-QyX"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" image="icon_refresh" id="toS-bY-kIk">
-                            <connections>
-                                <action selector="btnRefreshData:" destination="wDp-rO-HtX" id="Due-Fk-6NK"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem image="icon_refresh" id="toS-bY-kIk">
+                                <connections>
+                                    <action selector="btnRefreshData:" destination="wDp-rO-HtX" id="Due-Fk-6NK"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem image="icon_pin" id="cDk-wo-zca">
+                                <connections>
+                                    <action selector="btnSearchLocation:" destination="wDp-rO-HtX" id="xHA-EG-5Oy"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="1jL-Mn-g0W" id="7h7-u7-82H"/>

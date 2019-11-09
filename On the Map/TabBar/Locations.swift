@@ -10,12 +10,13 @@ import Foundation
 import SwiftyJSON
 
 
-class LocationsData{
+struct studentInformation {
     
-//    public
+    //    public
     static var isAddedLocations = false
+    static var arrStudentInformation = [studentInformation]()
     
-//    variables
+    //    variables
     var firstName:String
     var lastName:String
     var longitude:Double
@@ -31,7 +32,7 @@ class LocationsData{
             , let mapString = json["mapString"].string
             , let mediaURL = json["mediaURL"].string
             else {
-            return nil
+                return nil
         }
         self.firstName = firstName
         self.lastName = lastName
@@ -42,18 +43,30 @@ class LocationsData{
     }
     
     
-    class func getData(compilation:@escaping(_ result:[LocationsData]) -> Void){
-        API.webService(url: "https://onthemap-api.udacity.com/v1/StudentLocation?limit=100") { (resultJson) in
-            guard let arrayJson = resultJson["results"].array else {return}
+    private static func add(studint:studentInformation) {
+        studentInformation.arrStudentInformation.append(studint)
+    }
+    
+    private static func removeAll() {
+        studentInformation.arrStudentInformation.removeAll()
+    }
+    
+    static func getData(compilation:@escaping(_ error:Error?) -> Void){
+        API.webService(url: "https://onthemap-api.udacity.com/v1/StudentLocation?limit=100&order=-updatedAt") { (resultJson , error) in
             
-            var locationsData = [LocationsData]()
+            if error != nil {
+                compilation(error)
+                return
+            }
             
+            guard let arrayJson = resultJson?["results"].array else {return}
+            removeAll()
             for row in arrayJson {
-                if let point = LocationsData.init(json: row) {
-                    locationsData.append(point)
+                if let student = studentInformation.init(json: row) {
+                    add(studint: student)
                 }
             }
-            compilation(locationsData)
+            compilation( nil)
         }
     }
 }

@@ -44,12 +44,23 @@ class AddNewLocationVC: UIViewController {
     
     
     @IBAction func btnSaveLocation(_ sender: Any) {
-        guard let latitude = latitude , let longitude = longitude , let mediaURL = textFieldLinkToShare.text , !mediaURL.isEmpty else {return}
+        guard let latitude = latitude , let longitude = longitude , let mediaURL = textFieldLinkToShare.text , !mediaURL.isEmpty else {
+            let alert = UIAlertController.alert(message: "Please Enter a Link to Share!") {
+                self.textFieldLinkToShare.becomeFirstResponder()
+            }
+             present(alert, animated: true, completion: nil)
+            return
+        }
         let url = "https://onthemap-api.udacity.com/v1/StudentLocation"
         let httpBody = "{\"uniqueKey\": \"1234\", \"firstName\": \"Fadel\", \"lastName\": \"Sultan\",\"mapString\": \"Mountain View, CA\", \"mediaURL\": \"\(mediaURL)\",\"latitude\": \(latitude), \"longitude\": \(longitude)}"
         
-        API.webService(url: url , httpBody: httpBody) { (json) in
-            LocationsData.isAddedLocations = true
+        API.webService(url: url , httpBody: httpBody) { (json , error) in
+            if let error = error {
+                let alert = UIAlertController.alert(message: error.localizedDescription) {}
+                self.present(alert, animated: true, completion: nil)
+                return
+            }
+            studentInformation.isAddedLocations = true
             DispatchQueue.main.async {
                 self.navigationController?.popToRootViewController(animated: true)
             }

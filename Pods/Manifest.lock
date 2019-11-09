@@ -1,16 +1,24 @@
 PODS:
+  - IQKeyboardManagerSwift (6.5.2)
+  - JGProgressHUD (2.1)
   - SwiftyJSON (5.0.0)
 
 DEPENDENCIES:
+  - IQKeyboardManagerSwift
+  - JGProgressHUD
   - SwiftyJSON
 
 SPEC REPOS:
   trunk:
+    - IQKeyboardManagerSwift
+    - JGProgressHUD
     - SwiftyJSON
 
 SPEC CHECKSUMS:
+  IQKeyboardManagerSwift: c75366f1f19590e8caeae45fcd5815c9289d6099
+  JGProgressHUD: aa403e9a5b45cae98903c4600cccdd98c0c3ec90
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
 
-PODFILE CHECKSUM: c2333ee584489633f3d0324090f66324d23f34e7
+PODFILE CHECKSUM: 8b6be6b73ebb1bad0ece2151d277163abf33cdcc
 
-COCOAPODS: 1.8.3
+COCOAPODS: 1.8.4

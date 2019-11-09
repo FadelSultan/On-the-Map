@@ -12,11 +12,16 @@ import SwiftyJSON
 
 extension LoginVC {
     class model {
-        class func signIn(email:String , password:String , compilation:@escaping(_ isLogin:Bool)-> Void) {
+        
+        class func signIn(email:String , password:String , compilation:@escaping(_ isLogin:Bool , _ error:Error?)-> Void ) {
             let url = "https://onthemap-api.udacity.com/v1/session"
             let httpBody = "{\"udacity\": {\"username\": \"\(email)\", \"password\": \"\(password)\"}}"
-            API.webService(url: url, httpBody: httpBody , isLogin:true) { (result) in
-                compilation(result["account"]["registered"].boolValue)
+            API.webService(url: url, httpBody: httpBody , isLogin:true) { (result , error) in
+                if error != nil {
+                    compilation(false , error)
+                    return
+                }
+                compilation((result?["account"]["registered"].boolValue)! , nil)
             }
         }
     }
