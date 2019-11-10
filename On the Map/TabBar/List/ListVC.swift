@@ -71,8 +71,19 @@ extension ListVC : UITableViewDataSource , UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let app = UIApplication.shared
+       
         let row = studentInformation.arrStudentInformation[indexPath.row]
-        app.open(URL(string: row.mediaURL)!, options: [:], completionHandler: nil)
+        let app = UIApplication.shared
+        guard let url = URL(string: row.mediaURL) else {
+            let alert = UIAlertController.alert(message: "You have wrong in url \n \(row.mediaURL)") {}
+            present(alert, animated: true, completion: nil)
+            return
+        }
+        if !app.canOpenURL(url) {
+            let alert = UIAlertController.alert(message: "Can't open \n \(row.mediaURL)") {}
+            present(alert, animated: true, completion: nil)
+            return
+        }
+        app.open(url, options: [:], completionHandler: nil)
     }
 }
