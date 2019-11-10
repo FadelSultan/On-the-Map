@@ -124,7 +124,17 @@ extension MapVC : MKMapViewDelegate{
         if control == view.rightCalloutAccessoryView {
             let app = UIApplication.shared
             if let toOpen = view.annotation?.subtitle! {
-                app.open(URL(string: toOpen)!, options: [:], completionHandler: nil)
+                guard let url = URL(string: toOpen) else {
+                    let alert = UIAlertController.alert(message: "You have wrong in url \n \(toOpen)") {}
+                    present(alert, animated: true, completion: nil)
+                    return
+                }
+                if !app.canOpenURL(url) {
+                    let alert = UIAlertController.alert(message: "Can't open \n \(url)") {}
+                    present(alert, animated: true, completion: nil)
+                    return
+                }
+                app.open(url, options: [:], completionHandler: nil)
             }
         }
     }
